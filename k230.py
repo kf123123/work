@@ -11,7 +11,7 @@ SERVER_PORT = 8080
 
 MAX_UDP_SIZE = 1400
 
-
+time.sleep(10)
 # ================== 2. 无线网卡初始化与联网 ==================
 wlan = network.WLAN(network.STA_IF)
 wlan.active(True)
