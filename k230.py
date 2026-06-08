@@ -3,7 +3,7 @@ from media.sensor import *
 from media.media import *
 
 # ================== 1. 基础配置 ==================
-WIFI_SSID = "最快的wifi"
+WIFI_SSID = "fast_wifi"
 WIFI_PASS = "12345678"
 
 SERVER_IP = "192.168.25.189"
