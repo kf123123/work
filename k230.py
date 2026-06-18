@@ -6,7 +6,7 @@ from media.media import *
 WIFI_SSID = "fast_wifi"
 WIFI_PASS = "12345678"
 
-SERVER_IP = "192.168.25.189"
+SERVER_IP = "192.168.153.189"
 SERVER_PORT = 8080
 
 MAX_UDP_SIZE = 1400
