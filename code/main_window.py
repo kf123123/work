@@ -237,4 +237,4 @@ class Ui_MainWindow(object):
         self.btn_bwd_right.setText(_translate("MainWindow", "↘ 右下"))
         self.speed_label.setText(_translate("MainWindow", "速度"))
         self.speed_value_label.setText(_translate("MainWindow", "150"))
-        self.key_hint.setText(_translate("MainWindow", "W Q E / A S D / Z X C / 空格"))
+        self.key_hint.setText(_translate("MainWindow", "W A S D / X / 空格 / Q E Z C"))

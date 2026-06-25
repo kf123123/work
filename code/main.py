@@ -104,10 +104,10 @@ CMD = {
 # 正数 = 前进, 负数 = 后退, 比值乘 pwm 得到最终 L/R 值
 DIR_MOTOR = {
     CMD["STOP"]:      (0, 0),
-    CMD["FORWARD"]:   (1.0, 1.0),
+    CMD["FORWARD"]:   (0.9, 1.0),
     CMD["BACKWARD"]:  (-1.0, -1.0),
-    CMD["LEFT"]:      (-1.0, 1.0),    # 原地左转
-    CMD["RIGHT"]:     (1.0, -1.0),    # 原地右转
+    CMD["LEFT"]:      (-0.5, 0.5),    # 原地左转
+    CMD["RIGHT"]:     (0.5, -0.5),    # 原地右转
     CMD["FWD_LEFT"]:  (0.0, 1.0),     # 左前(左轮停右轮转,急转弯)
     CMD["FWD_RIGHT"]: (1.0, 0.0),     # 右前(右轮停左轮转)
     CMD["BWD_LEFT"]:  (-1.0, 0.0),    # 左后(左轮后退右轮停)
@@ -238,7 +238,8 @@ class ControlWindow(QMainWindow, Ui_MainWindow):
         self.setWindowTitle("车辆遥控控制系统 — 监控中心")
 
         # ---- 网络 ----
-        self.TARGET_IP = "192.168.153.54"
+        # self.TARGET_IP = "192.168.195.73"
+        self.TARGET_IP = "127.0.0.1"
         self.TARGET_PORT = 8888
         self.tcp_socket = None
         self.tcp_thread = None
@@ -415,6 +416,8 @@ class ControlWindow(QMainWindow, Ui_MainWindow):
     def send_command(self, t_value):
         self.current_cmd = None if t_value == CMD["STOP"] else t_value
         self._send_raw(self._make_motor_cmd(self.current_cmd))
+        if t_value == CMD["STOP"]:
+            self._send_raw({"T": 115})       # 补发专用停止指令，双重保险
         self._update_state_table()
 
     def _send_raw(self, cmd_dict):
@@ -480,11 +483,11 @@ class ControlWindow(QMainWindow, Ui_MainWindow):
         k = event.key()
 
         m = {
-            Qt.Key_W: CMD["FORWARD"], Qt.Key_S: CMD["BACKWARD"],
+            Qt.Key_W: CMD["FORWARD"], Qt.Key_X: CMD["BACKWARD"],
             Qt.Key_A: CMD["LEFT"], Qt.Key_D: CMD["RIGHT"],
             Qt.Key_Q: CMD["FWD_LEFT"], Qt.Key_E: CMD["FWD_RIGHT"],
             Qt.Key_Z: CMD["BWD_LEFT"], Qt.Key_C: CMD["BWD_RIGHT"],
-            Qt.Key_Space: CMD["STOP"],
+            Qt.Key_S: CMD["STOP"], Qt.Key_Space: CMD["STOP"],
         }
         if k in m:
             self.send_command(m[k])

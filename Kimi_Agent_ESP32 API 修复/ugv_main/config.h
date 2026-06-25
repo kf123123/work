@@ -31,8 +31,8 @@
 
 #define WIFI_AP_SSID      "UGV_car"
 #define WIFI_AP_PASSWORD  "12345678"
-#define WIFI_STA_SSID     "wangchunshuo"
-#define WIFI_STA_PASSWORD "20050407"
+#define WIFI_STA_SSID     " fast_wifi"
+#define WIFI_STA_PASSWORD "12345678"
 
 // TCP 服务器端口
 #define TCP_SERVER_PORT   8888
